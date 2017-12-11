@@ -44,26 +44,50 @@ namespace PublicNavWinForms
 
         private void stationFrom_KeyUp(object sender, KeyEventArgs e)
         {
-            searchResults.Items.Clear();
-            List<Station> stations = transport.GetStations(stationFrom.Text).StationList;
-            foreach (Station station in stations)
-            {
-                searchResults.Items.Add(station.Name);
-            }
+            ListStations(stationFrom.Text);
 
             fieldEntered = StationInputs.StationForm;
         }
 
         private void stationTo_KeyUp(object sender, KeyEventArgs e)
         {
+            ListStations(stationTo.Text);
+
+            fieldEntered = StationInputs.StationForm;
+        }
+
+        private void stationFrom_Enter(object sender, EventArgs e)
+        {
+            ListStations(stationFrom.Text);
+
+            fieldEntered = StationInputs.StationForm;
+        }
+
+        private void stationTo_Enter(object sender, EventArgs e)
+        {
+            ListStations(stationTo.Text);
+
+            fieldEntered = StationInputs.StationForm;
+        }
+
+        private void ListStations(string stationQuery)
+        {
             searchResults.Items.Clear();
-            List<Station> stations = transport.GetStations(stationFrom.Text).StationList;
+            List<Station> stations = transport.GetStations(stationQuery).StationList;
             foreach (Station station in stations)
             {
                 searchResults.Items.Add(station.Name);
             }
+        }
 
-            fieldEntered = StationInputs.StationForm;
+        private void stationFrom_Leave(object sender, EventArgs e)
+        {
+            searchResults.Items.Clear();
+        }
+
+        private void stationTo_Leave(object sender, EventArgs e)
+        {
+            searchResults.Items.Clear();
         }
     }
 }

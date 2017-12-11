@@ -39,7 +39,9 @@
             this.stationFrom.Name = "stationFrom";
             this.stationFrom.Size = new System.Drawing.Size(177, 22);
             this.stationFrom.TabIndex = 0;
+            this.stationFrom.Enter += new System.EventHandler(this.stationFrom_Enter);
             this.stationFrom.KeyUp += new System.Windows.Forms.KeyEventHandler(this.stationFrom_KeyUp);
+            this.stationFrom.Leave += new System.EventHandler(this.stationFrom_Leave);
             // 
             // searchResults
             // 
@@ -57,7 +59,9 @@
             this.stationTo.Name = "stationTo";
             this.stationTo.Size = new System.Drawing.Size(177, 22);
             this.stationTo.TabIndex = 2;
+            this.stationTo.Enter += new System.EventHandler(this.stationTo_Enter);
             this.stationTo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.stationTo_KeyUp);
+            this.stationTo.Leave += new System.EventHandler(this.stationTo_Leave);
             // 
             // PublicNavForm
             // 

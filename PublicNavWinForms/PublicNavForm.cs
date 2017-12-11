@@ -101,12 +101,34 @@ namespace PublicNavWinForms
                 foreach (Section section in connection.Sections)
                 {
                     connectionsGrid.Rows.Add(new object[]
+                    {
+                        "",
+                        "",
+                        "",
+                        section.Departure.Station.Name
+                    });
+                }
+            }
+        }
+
+        private void connectionsGrid_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            stationBoardsGrid.Rows.Clear();
+
+            string station = connectionsGrid.Rows[e.RowIndex].Cells["Station"].Value.ToString();
+
+            if (!string.IsNullOrWhiteSpace(station))
+            {
+                List<StationBoard> stationBoards = transport.GetStationBoard(station).Entries;
+                foreach (StationBoard board in stationBoards)
                 {
-                    "",
-                    "",
-                    "",
-                    section.Arrival.Station.Name
-                });
+                    stationBoardsGrid.Rows.Add(new object[]
+                    {
+                        board.Stop.Departure.ToString("HH:mm"),
+                        board.To,
+                        board.Number,
+                        board.Name
+                    });
                 }
             }
         }

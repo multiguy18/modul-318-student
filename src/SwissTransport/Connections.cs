@@ -46,9 +46,6 @@ namespace SwissTransport
 
     public class Section
     {
-        [JsonProperty("walk")]
-        public string Walk { get; set; }
-
         [JsonProperty("departure")]
         public ConnectionPoint Departure { get; set; }
 

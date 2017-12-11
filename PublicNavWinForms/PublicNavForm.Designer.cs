@@ -40,13 +40,16 @@
             this.stationBoardsGrid = new System.Windows.Forms.DataGridView();
             this.connectionBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.DepartureTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ToStation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BoardDirection = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ConnectionName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Platform = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.From = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.To = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Duration = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Station = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Direction = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.connectionsGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stationBoardsGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.connectionBindingSource)).BeginInit();
@@ -123,10 +126,12 @@
             this.connectionsGrid.AllowUserToDeleteRows = false;
             this.connectionsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.connectionsGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Time,
             this.From,
             this.To,
             this.Duration,
-            this.Station});
+            this.Station,
+            this.Direction});
             this.connectionsGrid.Cursor = System.Windows.Forms.Cursors.Default;
             this.connectionsGrid.Location = new System.Drawing.Point(35, 259);
             this.connectionsGrid.MultiSelect = false;
@@ -145,9 +150,10 @@
             this.stationBoardsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.stationBoardsGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.DepartureTime,
-            this.ToStation,
+            this.BoardDirection,
             this.Number,
-            this.ConnectionName});
+            this.ConnectionName,
+            this.Platform});
             this.stationBoardsGrid.Cursor = System.Windows.Forms.Cursors.Default;
             this.stationBoardsGrid.Location = new System.Drawing.Point(759, 259);
             this.stationBoardsGrid.MultiSelect = false;
@@ -169,11 +175,11 @@
             this.DepartureTime.ReadOnly = true;
             this.DepartureTime.Width = 80;
             // 
-            // ToStation
+            // BoardDirection
             // 
-            this.ToStation.HeaderText = "Nach";
-            this.ToStation.Name = "ToStation";
-            this.ToStation.ReadOnly = true;
+            this.BoardDirection.HeaderText = "Richtung";
+            this.BoardDirection.Name = "BoardDirection";
+            this.BoardDirection.ReadOnly = true;
             // 
             // Number
             // 
@@ -187,6 +193,19 @@
             this.ConnectionName.Name = "ConnectionName";
             this.ConnectionName.ReadOnly = true;
             // 
+            // Platform
+            // 
+            this.Platform.HeaderText = "Gleis / Kante";
+            this.Platform.Name = "Platform";
+            this.Platform.ReadOnly = true;
+            this.Platform.Width = 110;
+            // 
+            // Time
+            // 
+            this.Time.HeaderText = "Zeit";
+            this.Time.Name = "Time";
+            this.Time.ReadOnly = true;
+            // 
             // From
             // 
             this.From.HeaderText = "Von";
@@ -195,13 +214,13 @@
             // 
             // To
             // 
-            this.To.HeaderText = "Nach";
+            this.To.HeaderText = "Bis";
             this.To.Name = "To";
             this.To.ReadOnly = true;
             // 
             // Duration
             // 
-            this.Duration.HeaderText = "Länge";
+            this.Duration.HeaderText = "Dauer";
             this.Duration.Name = "Duration";
             this.Duration.ReadOnly = true;
             this.Duration.Width = 80;
@@ -211,6 +230,12 @@
             this.Station.HeaderText = "Station";
             this.Station.Name = "Station";
             this.Station.ReadOnly = true;
+            // 
+            // Direction
+            // 
+            this.Direction.HeaderText = "Richtung";
+            this.Direction.Name = "Direction";
+            this.Direction.ReadOnly = true;
             // 
             // PublicNavForm
             // 
@@ -249,13 +274,16 @@
         private System.Windows.Forms.DataGridView connectionsGrid;
         private System.Windows.Forms.DataGridView stationBoardsGrid;
         private System.Windows.Forms.DataGridViewTextBoxColumn DepartureTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ToStation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BoardDirection;
         private System.Windows.Forms.DataGridViewTextBoxColumn Number;
         private System.Windows.Forms.DataGridViewTextBoxColumn ConnectionName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Platform;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Time;
         private System.Windows.Forms.DataGridViewTextBoxColumn From;
         private System.Windows.Forms.DataGridViewTextBoxColumn To;
         private System.Windows.Forms.DataGridViewTextBoxColumn Duration;
         private System.Windows.Forms.DataGridViewTextBoxColumn Station;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Direction;
     }
 }
 

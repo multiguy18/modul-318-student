@@ -90,11 +90,15 @@ namespace PublicNavWinForms
             Connections connections = transport.GetConnections(stationFrom.Text, stationTo.Text);
             foreach (Connection connection in connections.ConnectionList)
             {
+
+
                 connectionsGrid.Rows.Add(new object[]
                 {
+                    connection.From.Departure.Value.ToString("HH:mm"),
                     connection.From.Station.Name,
                     connection.To.Station.Name,
                     connection.Duration.Substring(3),
+                    "",
                     ""
                 });
 
@@ -105,7 +109,9 @@ namespace PublicNavWinForms
                         "",
                         "",
                         "",
-                        section.Departure.Station.Name
+                        "",
+                        section.Departure.Station.Name,
+                        ""
                     });
                 }
             }
@@ -127,7 +133,8 @@ namespace PublicNavWinForms
                         board.Stop.Departure.ToString("HH:mm"),
                         board.To,
                         board.Number,
-                        board.Name
+                        board.Name,
+                        board.Stop.Platform
                     });
                 }
             }

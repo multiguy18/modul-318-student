@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using System;
 
 namespace SwissTransport
 {
@@ -29,11 +30,11 @@ namespace SwissTransport
         [JsonProperty("station")]
         public Station Station { get; set; }
 
-        public string Arrival { get; set; }
+        public DateTime? Arrival { get; set; }
 
         public string ArrivalTimestamp { get; set; }
 
-        public string Departure { get; set; }
+        public DateTime? Departure { get; set; }
 
         public string DepartureTimestamp { get; set; }
 
@@ -46,10 +47,19 @@ namespace SwissTransport
 
     public class Section
     {
+        [JsonProperty("journey")]
+        public Journey Journey { get; set; }
+
         [JsonProperty("departure")]
         public ConnectionPoint Departure { get; set; }
 
         [JsonProperty("arrival")]
         public ConnectionPoint Arrival { get; set; }
+    }
+
+    public class Journey
+    {
+        [JsonProperty("to")]
+        public string To { get; set; }
     }
 }

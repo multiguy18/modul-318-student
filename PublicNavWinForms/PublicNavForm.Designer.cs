@@ -31,23 +31,23 @@
             this.stationFrom = new System.Windows.Forms.TextBox();
             this.searchResults = new System.Windows.Forms.ListBox();
             this.stationTo = new System.Windows.Forms.TextBox();
+            this.exchangeStations = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // stationFrom
             // 
-            this.stationFrom.Location = new System.Drawing.Point(39, 37);
+            this.stationFrom.Location = new System.Drawing.Point(86, 36);
             this.stationFrom.Name = "stationFrom";
             this.stationFrom.Size = new System.Drawing.Size(177, 22);
             this.stationFrom.TabIndex = 0;
             this.stationFrom.Enter += new System.EventHandler(this.stationFrom_Enter);
             this.stationFrom.KeyUp += new System.Windows.Forms.KeyEventHandler(this.stationFrom_KeyUp);
-            this.stationFrom.Leave += new System.EventHandler(this.stationFrom_Leave);
             // 
             // searchResults
             // 
             this.searchResults.FormattingEnabled = true;
             this.searchResults.ItemHeight = 16;
-            this.searchResults.Location = new System.Drawing.Point(39, 65);
+            this.searchResults.Location = new System.Drawing.Point(86, 64);
             this.searchResults.Name = "searchResults";
             this.searchResults.Size = new System.Drawing.Size(177, 68);
             this.searchResults.TabIndex = 1;
@@ -55,19 +55,28 @@
             // 
             // stationTo
             // 
-            this.stationTo.Location = new System.Drawing.Point(39, 139);
+            this.stationTo.Location = new System.Drawing.Point(86, 138);
             this.stationTo.Name = "stationTo";
             this.stationTo.Size = new System.Drawing.Size(177, 22);
             this.stationTo.TabIndex = 2;
             this.stationTo.Enter += new System.EventHandler(this.stationTo_Enter);
             this.stationTo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.stationTo_KeyUp);
-            this.stationTo.Leave += new System.EventHandler(this.stationTo_Leave);
+            // 
+            // exchangeStations
+            // 
+            this.exchangeStations.Location = new System.Drawing.Point(270, 77);
+            this.exchangeStations.Name = "exchangeStations";
+            this.exchangeStations.Size = new System.Drawing.Size(47, 46);
+            this.exchangeStations.TabIndex = 3;
+            this.exchangeStations.UseVisualStyleBackColor = true;
+            this.exchangeStations.Click += new System.EventHandler(this.exchangeStations_Click);
             // 
             // PublicNavForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1000, 453);
+            this.Controls.Add(this.exchangeStations);
             this.Controls.Add(this.stationTo);
             this.Controls.Add(this.searchResults);
             this.Controls.Add(this.stationFrom);
@@ -83,6 +92,7 @@
         private System.Windows.Forms.TextBox stationFrom;
         private System.Windows.Forms.ListBox searchResults;
         private System.Windows.Forms.TextBox stationTo;
+        private System.Windows.Forms.Button exchangeStations;
     }
 }
 

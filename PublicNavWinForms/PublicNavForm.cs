@@ -16,7 +16,7 @@ namespace PublicNavWinForms
         enum StationInputs
         {
             None,
-            StationForm,
+            StationFrom,
             StationTo
         }
 
@@ -33,7 +33,7 @@ namespace PublicNavWinForms
         {
             switch (fieldEntered)
             {
-                case StationInputs.StationForm:
+                case StationInputs.StationFrom:
                     stationFrom.Text = searchResults.Text;
                     break;
                 case StationInputs.StationTo:
@@ -45,29 +45,25 @@ namespace PublicNavWinForms
         private void stationFrom_KeyUp(object sender, KeyEventArgs e)
         {
             ListStations(stationFrom.Text);
-
-            fieldEntered = StationInputs.StationForm;
         }
 
         private void stationTo_KeyUp(object sender, KeyEventArgs e)
         {
             ListStations(stationTo.Text);
-
-            fieldEntered = StationInputs.StationForm;
         }
 
         private void stationFrom_Enter(object sender, EventArgs e)
         {
             ListStations(stationFrom.Text);
 
-            fieldEntered = StationInputs.StationForm;
+            fieldEntered = StationInputs.StationFrom;
         }
 
         private void stationTo_Enter(object sender, EventArgs e)
         {
             ListStations(stationTo.Text);
 
-            fieldEntered = StationInputs.StationForm;
+            fieldEntered = StationInputs.StationTo;
         }
 
         private void ListStations(string stationQuery)
@@ -80,14 +76,11 @@ namespace PublicNavWinForms
             }
         }
 
-        private void stationFrom_Leave(object sender, EventArgs e)
+        private void exchangeStations_Click(object sender, EventArgs e)
         {
-            searchResults.Items.Clear();
-        }
-
-        private void stationTo_Leave(object sender, EventArgs e)
-        {
-            searchResults.Items.Clear();
+            string tempStationFrom = stationFrom.Text;
+            stationFrom.Text = stationTo.Text;
+            stationTo.Text = tempStationFrom;
         }
     }
 }

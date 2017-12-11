@@ -29,32 +29,6 @@ namespace PublicNavWinForms
             transport = new Transport();
         }
 
-        private void stationFrom_TextChanged(object sender, EventArgs e)
-        {
-
-            searchResults.Items.Clear();
-            List<Station> stations = transport.GetStations(stationFrom.Text).StationList;
-            foreach (Station station in stations)
-            {
-                searchResults.Items.Add(station.Name);
-            }
-
-            fieldEntered = StationInputs.StationForm;
-        }
-
-        private void stationTo_TextChanged(object sender, EventArgs e)
-        {
-            searchResults.Items.Clear();
-
-            List<Station> stations = transport.GetStations(stationFrom.Text).StationList;
-            foreach (Station station in stations)
-            {
-                searchResults.Items.Add(station.Name);
-            }
-
-            fieldEntered = StationInputs.StationTo;
-        }
-
         private void searchResults_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (fieldEntered)
@@ -66,6 +40,30 @@ namespace PublicNavWinForms
                     stationTo.Text = searchResults.Text;
                     break;
             }
+        }
+
+        private void stationFrom_KeyUp(object sender, KeyEventArgs e)
+        {
+            searchResults.Items.Clear();
+            List<Station> stations = transport.GetStations(stationFrom.Text).StationList;
+            foreach (Station station in stations)
+            {
+                searchResults.Items.Add(station.Name);
+            }
+
+            fieldEntered = StationInputs.StationForm;
+        }
+
+        private void stationTo_KeyUp(object sender, KeyEventArgs e)
+        {
+            searchResults.Items.Clear();
+            List<Station> stations = transport.GetStations(stationFrom.Text).StationList;
+            foreach (Station station in stations)
+            {
+                searchResults.Items.Add(station.Name);
+            }
+
+            fieldEntered = StationInputs.StationForm;
         }
     }
 }

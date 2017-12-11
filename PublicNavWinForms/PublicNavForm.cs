@@ -82,5 +82,33 @@ namespace PublicNavWinForms
             stationFrom.Text = stationTo.Text;
             stationTo.Text = tempStationFrom;
         }
+
+        private void queryConnections_Click(object sender, EventArgs e)
+        {
+            connectionsGrid.Rows.Clear();
+
+            Connections connections = transport.GetConnections(stationFrom.Text, stationTo.Text);
+            foreach (Connection connection in connections.ConnectionList)
+            {
+                connectionsGrid.Rows.Add(new object[]
+                {
+                    connection.From.Station.Name,
+                    connection.To.Station.Name,
+                    connection.Duration.Substring(3),
+                    ""
+                });
+
+                foreach (Section section in connection.Sections)
+                {
+                    connectionsGrid.Rows.Add(new object[]
+                {
+                    "",
+                    "",
+                    "",
+                    section.Arrival.Station.Name
+                });
+                }
+            }
+        }
     }
 }

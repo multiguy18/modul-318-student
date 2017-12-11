@@ -28,12 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.stationFrom = new System.Windows.Forms.TextBox();
             this.searchResults = new System.Windows.Forms.ListBox();
             this.stationTo = new System.Windows.Forms.TextBox();
             this.exchangeStations = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.queryConnections = new System.Windows.Forms.Button();
+            this.connectionsGrid = new System.Windows.Forms.DataGridView();
+            this.From = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.To = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Duration = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Station = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.connectionBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.connectionsGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.connectionBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // stationFrom
@@ -91,11 +101,69 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Von:";
             // 
+            // queryConnections
+            // 
+            this.queryConnections.Location = new System.Drawing.Point(35, 188);
+            this.queryConnections.Name = "queryConnections";
+            this.queryConnections.Size = new System.Drawing.Size(371, 46);
+            this.queryConnections.TabIndex = 6;
+            this.queryConnections.Text = "Suchen";
+            this.queryConnections.UseVisualStyleBackColor = true;
+            this.queryConnections.Click += new System.EventHandler(this.queryConnections_Click);
+            // 
+            // connectionsGrid
+            // 
+            this.connectionsGrid.AllowUserToAddRows = false;
+            this.connectionsGrid.AllowUserToDeleteRows = false;
+            this.connectionsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.connectionsGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.From,
+            this.To,
+            this.Duration,
+            this.Station});
+            this.connectionsGrid.Cursor = System.Windows.Forms.Cursors.Default;
+            this.connectionsGrid.Location = new System.Drawing.Point(35, 259);
+            this.connectionsGrid.Name = "connectionsGrid";
+            this.connectionsGrid.ReadOnly = true;
+            this.connectionsGrid.RowTemplate.Height = 24;
+            this.connectionsGrid.Size = new System.Drawing.Size(446, 150);
+            this.connectionsGrid.TabIndex = 7;
+            // 
+            // From
+            // 
+            this.From.HeaderText = "Von";
+            this.From.Name = "From";
+            this.From.ReadOnly = true;
+            // 
+            // To
+            // 
+            this.To.HeaderText = "Nach";
+            this.To.Name = "To";
+            this.To.ReadOnly = true;
+            // 
+            // Duration
+            // 
+            this.Duration.HeaderText = "Länge";
+            this.Duration.Name = "Duration";
+            this.Duration.ReadOnly = true;
+            // 
+            // Station
+            // 
+            this.Station.HeaderText = "Station";
+            this.Station.Name = "Station";
+            this.Station.ReadOnly = true;
+            // 
+            // connectionBindingSource
+            // 
+            this.connectionBindingSource.DataSource = typeof(SwissTransport.Connection);
+            // 
             // PublicNavForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(709, 453);
+            this.ClientSize = new System.Drawing.Size(1305, 453);
+            this.Controls.Add(this.connectionsGrid);
+            this.Controls.Add(this.queryConnections);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.exchangeStations);
@@ -104,6 +172,8 @@
             this.Controls.Add(this.stationFrom);
             this.Name = "PublicNavForm";
             this.Text = "PublicNav";
+            ((System.ComponentModel.ISupportInitialize)(this.connectionsGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.connectionBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -117,6 +187,13 @@
         private System.Windows.Forms.Button exchangeStations;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button queryConnections;
+        private System.Windows.Forms.BindingSource connectionBindingSource;
+        private System.Windows.Forms.DataGridView connectionsGrid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn From;
+        private System.Windows.Forms.DataGridViewTextBoxColumn To;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Duration;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Station;
     }
 }
 

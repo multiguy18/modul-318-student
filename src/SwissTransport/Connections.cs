@@ -19,6 +19,9 @@ namespace SwissTransport
 
         [JsonProperty("duration")]
         public string Duration { get; set; }
+
+        [JsonProperty("sections")]
+        public List<Section> Sections { get; set; }
     }
 
     public class ConnectionPoint
@@ -39,5 +42,17 @@ namespace SwissTransport
         public string Platform { get; set; }
 
         public string RealtimeAvailability { get; set; }
+    }
+
+    public class Section
+    {
+        [JsonProperty("walk")]
+        public string Walk { get; set; }
+
+        [JsonProperty("departure")]
+        public ConnectionPoint Departure { get; set; }
+
+        [JsonProperty("arrival")]
+        public ConnectionPoint Arrival { get; set; }
     }
 }

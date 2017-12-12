@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SwissTransport;
 using System.Globalization;
+using System.Net;
 
 namespace PublicNavWinForms
 {
@@ -27,6 +28,23 @@ namespace PublicNavWinForms
         public PublicNavForm()
         {
             InitializeComponent();
+
+            try {
+                using (WebClient client = new WebClient())
+                {
+                    client.OpenRead("http://transport.opendata.ch");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("http://transport.opendata.ch ist nicht verfügbar. " +
+                    "Bitte überprüfen sie ihre Internetverbindung oder ihre Proxy-Einstellungen. " +
+                    "Sollte das Problem weiterhin bestehen, dann wenden sie sich an den Author der Anwendung unter: " +
+                    "https://github.com/multiguy18/modul-318-student", "Netzwerkfehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Close();
+            }
+            
+
             transport = new Transport();
         }
 

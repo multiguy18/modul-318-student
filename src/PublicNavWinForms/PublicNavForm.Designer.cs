@@ -37,7 +37,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.queryConnections = new System.Windows.Forms.Button();
             this.connectionsGrid = new System.Windows.Forms.DataGridView();
-            this.stationBoardsGrid = new System.Windows.Forms.DataGridView();
             this.From = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.To = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,14 +45,16 @@
             this.Station = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Direction = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EndStation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label3 = new System.Windows.Forms.Label();
-            this.stationLabel = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.stationBoardsGrid = new System.Windows.Forms.DataGridView();
             this.DepartureTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BoardDirection = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ConnectionName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Platform = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label3 = new System.Windows.Forms.Label();
+            this.stationLabel = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.connectionsGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stationBoardsGrid)).BeginInit();
             this.SuspendLayout();
@@ -149,27 +150,6 @@
             this.connectionsGrid.TabIndex = 7;
             this.connectionsGrid.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.connectionsGrid_RowEnter);
             // 
-            // stationBoardsGrid
-            // 
-            this.stationBoardsGrid.AllowUserToAddRows = false;
-            this.stationBoardsGrid.AllowUserToDeleteRows = false;
-            this.stationBoardsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.stationBoardsGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.DepartureTime,
-            this.BoardDirection,
-            this.Number,
-            this.ConnectionName,
-            this.Platform});
-            this.stationBoardsGrid.Cursor = System.Windows.Forms.Cursors.Default;
-            this.stationBoardsGrid.Location = new System.Drawing.Point(438, 36);
-            this.stationBoardsGrid.MultiSelect = false;
-            this.stationBoardsGrid.Name = "stationBoardsGrid";
-            this.stationBoardsGrid.ReadOnly = true;
-            this.stationBoardsGrid.RowHeadersVisible = false;
-            this.stationBoardsGrid.RowTemplate.Height = 24;
-            this.stationBoardsGrid.Size = new System.Drawing.Size(505, 188);
-            this.stationBoardsGrid.TabIndex = 8;
-            // 
             // From
             // 
             this.From.HeaderText = "Von";
@@ -221,32 +201,26 @@
             this.EndStation.Name = "EndStation";
             this.EndStation.ReadOnly = true;
             // 
-            // label3
+            // stationBoardsGrid
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(435, 16);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(92, 17);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Abfahrtstafel:";
-            // 
-            // stationLabel
-            // 
-            this.stationLabel.AutoSize = true;
-            this.stationLabel.Location = new System.Drawing.Point(533, 16);
-            this.stationLabel.Name = "stationLabel";
-            this.stationLabel.Size = new System.Drawing.Size(0, 17);
-            this.stationLabel.TabIndex = 10;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(32, 236);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(101, 17);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "Verbindungen:";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            this.stationBoardsGrid.AllowUserToAddRows = false;
+            this.stationBoardsGrid.AllowUserToDeleteRows = false;
+            this.stationBoardsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.stationBoardsGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DepartureTime,
+            this.BoardDirection,
+            this.Number,
+            this.ConnectionName,
+            this.Platform});
+            this.stationBoardsGrid.Cursor = System.Windows.Forms.Cursors.Default;
+            this.stationBoardsGrid.Location = new System.Drawing.Point(438, 36);
+            this.stationBoardsGrid.MultiSelect = false;
+            this.stationBoardsGrid.Name = "stationBoardsGrid";
+            this.stationBoardsGrid.ReadOnly = true;
+            this.stationBoardsGrid.RowHeadersVisible = false;
+            this.stationBoardsGrid.RowTemplate.Height = 24;
+            this.stationBoardsGrid.Size = new System.Drawing.Size(505, 188);
+            this.stationBoardsGrid.TabIndex = 8;
             // 
             // DepartureTime
             // 
@@ -282,11 +256,49 @@
             this.Platform.ReadOnly = true;
             this.Platform.Width = 50;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(435, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(92, 17);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Abfahrtstafel:";
+            // 
+            // stationLabel
+            // 
+            this.stationLabel.AutoSize = true;
+            this.stationLabel.Location = new System.Drawing.Point(533, 16);
+            this.stationLabel.Name = "stationLabel";
+            this.stationLabel.Size = new System.Drawing.Size(0, 17);
+            this.stationLabel.TabIndex = 10;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(32, 236);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(101, 17);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Verbindungen:";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(414, 236);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(529, 17);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Auf eine Zeile mit einem Eintrag in Station klicken, um die Abfahrtstafel anzuzei" +
+    "gen";
+            // 
             // PublicNavForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(975, 540);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.stationLabel);
             this.Controls.Add(this.label3);
@@ -335,6 +347,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Number;
         private System.Windows.Forms.DataGridViewTextBoxColumn ConnectionName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Platform;
+        private System.Windows.Forms.Label label5;
     }
 }
 

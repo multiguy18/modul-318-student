@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using SwissTransport;
 using System.Globalization;
 using System.Net;
+using PublicNavWinForms.Models;
 
 namespace PublicNavWinForms
 {
@@ -23,28 +24,23 @@ namespace PublicNavWinForms
         }
 
         Transport transport;
+        PublicNav publicNav;
         StationInputs fieldEntered;
 
         public PublicNavForm()
         {
             InitializeComponent();
 
-            try {
-                using (WebClient client = new WebClient())
-                {
-                    client.OpenRead("http://transport.opendata.ch");
-                }
-            }
-            catch
+            try
             {
-                MessageBox.Show("http://transport.opendata.ch ist nicht verfügbar. " +
-                    "Bitte überprüfen sie ihre Internetverbindung oder ihre Proxy-Einstellungen. " +
-                    "Sollte das Problem weiterhin bestehen, dann wenden sie sich an den Author der Anwendung unter: " +
-                    "https://github.com/multiguy18/modul-318-student", "Netzwerkfehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                publicNav = new PublicNav();
+            }
+            catch (WebException)
+            {
+                ShowConnectionError();
                 Close();
             }
             
-
             transport = new Transport();
         }
 
@@ -88,10 +84,14 @@ namespace PublicNavWinForms
         private void ListStations(string stationQuery)
         {
             searchResults.Items.Clear();
-            List<Station> stations = transport.GetStations(stationQuery).StationList;
-            foreach (Station station in stations)
+
+            try
             {
-                searchResults.Items.Add(station.Name);
+                searchResults.Items.AddRange(publicNav.GetStations(stationQuery).ToArray());
+            }
+            catch
+            {
+                ShowConnectionError();
             }
         }
 
@@ -106,47 +106,30 @@ namespace PublicNavWinForms
         {
             connectionsGrid.Rows.Clear();
 
-            Connections connections = transport.GetConnections(stationFrom.Text, stationTo.Text);
-            foreach (Connection connection in connections.ConnectionList)
+            IEnumerable<ConnectionEntry> connections = null;
+
+            try
             {
-                connectionsGrid.Rows.Add(new object[]
-                {
-                    connection.From.Station.Name,
-                    connection.To.Station.Name,
-                    connection.From.Departure.Value.ToString("HH:mm"),
-                    connection.To.Arrival.Value.ToString("HH:mm"),
-                    connection.Duration.Substring(3, 5),
-                    "",
-                    "",
-                    ""
+                connections = publicNav.GetConnections(stationFrom.Text, stationTo.Text);
+            }
+            catch (WebException)
+            {
+                ShowConnectionError();
+                return;
+            }
+
+            foreach (ConnectionEntry connection in connections)
+            {
+                connectionsGrid.Rows.Add(new object[] {
+                    connection.StationFrom,
+                    connection.StationTo,
+                    connection.DepartureTime,
+                    connection.ArrivalTime,
+                    connection.Duration,
+                    connection.DepartureStation,
+                    connection.Direction,
+                    connection.ArrivalStation
                 });
-
-                foreach (Section section in connection.Sections)
-                {
-                    string sectionDirection;
-                    string sectionArrival = section.Arrival.Arrival.Value.ToString("HH:mm");
-
-                    if (section.Journey != null)
-                    {
-                        sectionDirection = section.Journey.To;
-                    }
-                    else
-                    {
-                        sectionDirection = "";
-                    }
-
-                    connectionsGrid.Rows.Add(new object[]
-                    {
-                        "",
-                        "",
-                        section.Departure.Departure.Value.ToString("HH:mm"),
-                        section.Arrival.Arrival.Value.ToString("HH:mm"),
-                        "",
-                        section.Departure.Station.Name,
-                        sectionDirection,
-                        section.Arrival.Station.Name
-                    });
-                }
             }
 
             DisplayStationBoard(stationFrom.Text);
@@ -154,50 +137,61 @@ namespace PublicNavWinForms
 
         private void connectionsGrid_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            string station = connectionsGrid.Rows[e.RowIndex].Cells["Station"].Value.ToString();
-            string strtime = connectionsGrid.Rows[e.RowIndex].Cells["Time"].Value.ToString();
+            string station = "";
+            string strtime = "";
+
+            if (connectionsGrid.Rows[e.RowIndex].Cells["Station"].Value != null)
+            {
+                station = connectionsGrid.Rows[e.RowIndex].Cells["Station"].Value.ToString();
+                strtime = connectionsGrid.Rows[e.RowIndex].Cells["Time"].Value.ToString();
+            }
 
             DisplayStationBoard(station, strtime);
         }
 
         private void DisplayStationBoard(string station, string time = "")
         {
-            List<StationBoard> stationBoards = null;
-
             stationLabel.Text = "";
             stationBoardsGrid.Rows.Clear();
 
-            if (!string.IsNullOrWhiteSpace(station))
+            stationLabel.Text = station;
+
+            IEnumerable<BoardEntry> boardEntrys = null;
+
+            try
             {
-                stationLabel.Text = station;
+                boardEntrys = publicNav.GetStationBoardEntries(station, time);
+            }
+            catch (WebException)
+            {
+                ShowConnectionError();
+                return;
+            }
 
-                if (!string.IsNullOrWhiteSpace(time))
-                {
-                    DateTime departureTime = DateTime.ParseExact(time, "HH:mm", CultureInfo.InvariantCulture);
-                    stationBoards = transport.GetStationBoard(station, departureTime).Entries;
-                }
-                else
-                {
-                    stationBoards = transport.GetStationBoard(station).Entries;
-                }
-
-                foreach (StationBoard board in stationBoards)
-                {
-                    stationBoardsGrid.Rows.Add(new object[]
-                    {
-                        board.Stop.Departure.ToString("HH:mm"),
-                        board.To,
-                        board.Number,
-                        board.Name,
-                        board.Stop.Platform
-                    });
-                }
+            foreach (BoardEntry boardEntry in boardEntrys)
+            {
+                stationBoardsGrid.Rows.Add(new object[] {
+                    boardEntry.DepartureTime,
+                    boardEntry.Direction,
+                    boardEntry.Name,
+                    boardEntry.Number,
+                    boardEntry.Platform
+                });
             }
         }
 
         private void label4_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void ShowConnectionError()
+        {
+            MessageBox.Show("http://transport.opendata.ch ist nicht verfügbar. " +
+                "Bitte überprüfen sie ihre Internetverbindung oder ihre Proxy-Einstellungen. " +
+                "Sollte das Problem weiterhin bestehen, dann wenden sie sich an den Author der Anwendung unter: " +
+                "https://github.com/multiguy18/modul-318-student", "Netzwerkfehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Close();
         }
     }
 }

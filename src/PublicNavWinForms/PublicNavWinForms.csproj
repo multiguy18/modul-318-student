@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="Models\BoardEntry.cs" />
     <Compile Include="Models\ConnectionEntry.cs" />
+    <Compile Include="PublicNav.cs" />
     <Compile Include="PublicNavForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SwissTransport;
+using System.Globalization;
 
 namespace PublicNavWinForms
 {
@@ -90,28 +91,42 @@ namespace PublicNavWinForms
             Connections connections = transport.GetConnections(stationFrom.Text, stationTo.Text);
             foreach (Connection connection in connections.ConnectionList)
             {
-
-
                 connectionsGrid.Rows.Add(new object[]
                 {
-                    connection.From.Departure.Value.ToString("HH:mm"),
                     connection.From.Station.Name,
                     connection.To.Station.Name,
-                    connection.Duration.Substring(3),
+                    connection.From.Departure.Value.ToString("HH:mm"),
+                    connection.To.Arrival.Value.ToString("HH:mm"),
+                    connection.Duration.Substring(3, 5),
+                    "",
                     "",
                     ""
                 });
 
                 foreach (Section section in connection.Sections)
                 {
+                    string sectionDirection;
+                    string sectionArrival = section.Arrival.Arrival.Value.ToString("HH:mm");
+
+                    if (section.Journey != null)
+                    {
+                        sectionDirection = section.Journey.To;
+                    }
+                    else
+                    {
+                        sectionDirection = "";
+                    }
+
                     connectionsGrid.Rows.Add(new object[]
                     {
                         "",
                         "",
-                        "",
+                        section.Departure.Departure.Value.ToString("HH:mm"),
+                        section.Arrival.Arrival.Value.ToString("HH:mm"),
                         "",
                         section.Departure.Station.Name,
-                        ""
+                        sectionDirection,
+                        section.Arrival.Station.Name
                     });
                 }
             }
@@ -122,10 +137,14 @@ namespace PublicNavWinForms
             stationBoardsGrid.Rows.Clear();
 
             string station = connectionsGrid.Rows[e.RowIndex].Cells["Station"].Value.ToString();
+            string strtime = connectionsGrid.Rows[e.RowIndex].Cells["Time"].Value.ToString();
 
             if (!string.IsNullOrWhiteSpace(station))
             {
-                List<StationBoard> stationBoards = transport.GetStationBoard(station).Entries;
+
+                DateTime departureTime = DateTime.ParseExact(strtime, "HH:mm", CultureInfo.InvariantCulture);
+
+                List<StationBoard> stationBoards = transport.GetStationBoard(station, departureTime).Entries;
                 foreach (StationBoard board in stationBoards)
                 {
                     stationBoardsGrid.Rows.Add(new object[]

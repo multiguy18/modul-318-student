@@ -173,8 +173,8 @@ namespace PublicNavWinForms
                 stationBoardsGrid.Rows.Add(new object[] {
                     boardEntry.DepartureTime,
                     boardEntry.Direction,
-                    boardEntry.Name,
                     boardEntry.Number,
+                    boardEntry.Name,
                     boardEntry.Platform
                 });
             }

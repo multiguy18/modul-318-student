@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // Allgemeine Informationen über eine Assembly werden über die folgenden
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
-[assembly: AssemblyTitle("PublicNavWinForms")]
+[assembly: AssemblyTitle("PublicNav")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Hewlett-Packard")]
-[assembly: AssemblyProduct("PublicNavWinForms")]
-[assembly: AssemblyCopyright("Copyright © Hewlett-Packard 2017")]
+[assembly: AssemblyCompany("A. Schacher")]
+[assembly: AssemblyProduct("PublicNav")]
+[assembly: AssemblyCopyright("Copyright © A. Schacher")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

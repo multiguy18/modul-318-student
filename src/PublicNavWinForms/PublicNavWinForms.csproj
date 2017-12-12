@@ -7,7 +7,7 @@
     <ProjectGuid>{EB2EA40B-0AF6-4049-9FCF-97363AFB8373}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>PublicNavWinForms</RootNamespace>
-    <AssemblyName>PublicNavWinForms</AssemblyName>
+    <AssemblyName>PublicNav</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -22,7 +22,12 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <SupportUrl>https://github.com/multiguy18/modul-318-student</SupportUrl>
+    <ErrorReportUrl>https://github.com/multiguy18/modul-318-student</ErrorReportUrl>
+    <TargetCulture>de-CH</TargetCulture>
+    <ProductName>PublicNav</ProductName>
+    <PublisherName>A. Schacher</PublisherName>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>

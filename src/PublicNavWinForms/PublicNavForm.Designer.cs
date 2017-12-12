@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PublicNavForm));
             this.stationFrom = new System.Windows.Forms.TextBox();
             this.searchResults = new System.Windows.Forms.ListBox();
             this.stationTo = new System.Windows.Forms.TextBox();
@@ -44,12 +45,15 @@
             this.Duration = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Station = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Direction = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EndStation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label3 = new System.Windows.Forms.Label();
+            this.stationLabel = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.DepartureTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BoardDirection = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ConnectionName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Platform = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EndStation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.connectionsGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stationBoardsGrid)).BeginInit();
             this.SuspendLayout();
@@ -84,6 +88,7 @@
             // 
             // exchangeStations
             // 
+            this.exchangeStations.Image = ((System.Drawing.Image)(resources.GetObject("exchangeStations.Image")));
             this.exchangeStations.Location = new System.Drawing.Point(359, 75);
             this.exchangeStations.Name = "exchangeStations";
             this.exchangeStations.Size = new System.Drawing.Size(47, 46);
@@ -134,13 +139,13 @@
             this.Direction,
             this.EndStation});
             this.connectionsGrid.Cursor = System.Windows.Forms.Cursors.Default;
-            this.connectionsGrid.Location = new System.Drawing.Point(35, 243);
+            this.connectionsGrid.Location = new System.Drawing.Point(35, 256);
             this.connectionsGrid.MultiSelect = false;
             this.connectionsGrid.Name = "connectionsGrid";
             this.connectionsGrid.ReadOnly = true;
             this.connectionsGrid.RowHeadersVisible = false;
             this.connectionsGrid.RowTemplate.Height = 24;
-            this.connectionsGrid.Size = new System.Drawing.Size(862, 253);
+            this.connectionsGrid.Size = new System.Drawing.Size(908, 253);
             this.connectionsGrid.TabIndex = 7;
             this.connectionsGrid.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.connectionsGrid_RowEnter);
             // 
@@ -156,13 +161,13 @@
             this.ConnectionName,
             this.Platform});
             this.stationBoardsGrid.Cursor = System.Windows.Forms.Cursors.Default;
-            this.stationBoardsGrid.Location = new System.Drawing.Point(35, 546);
+            this.stationBoardsGrid.Location = new System.Drawing.Point(438, 36);
             this.stationBoardsGrid.MultiSelect = false;
             this.stationBoardsGrid.Name = "stationBoardsGrid";
             this.stationBoardsGrid.ReadOnly = true;
             this.stationBoardsGrid.RowHeadersVisible = false;
             this.stationBoardsGrid.RowTemplate.Height = 24;
-            this.stationBoardsGrid.Size = new System.Drawing.Size(862, 142);
+            this.stationBoardsGrid.Size = new System.Drawing.Size(505, 188);
             this.stationBoardsGrid.TabIndex = 8;
             // 
             // From
@@ -210,6 +215,39 @@
             this.Direction.Name = "Direction";
             this.Direction.ReadOnly = true;
             // 
+            // EndStation
+            // 
+            this.EndStation.HeaderText = "Endstation";
+            this.EndStation.Name = "EndStation";
+            this.EndStation.ReadOnly = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(435, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(92, 17);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Abfahrtstafel:";
+            // 
+            // stationLabel
+            // 
+            this.stationLabel.AutoSize = true;
+            this.stationLabel.Location = new System.Drawing.Point(533, 16);
+            this.stationLabel.Name = "stationLabel";
+            this.stationLabel.Size = new System.Drawing.Size(0, 17);
+            this.stationLabel.TabIndex = 10;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(32, 236);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(101, 17);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Verbindungen:";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
             // DepartureTime
             // 
             this.DepartureTime.HeaderText = "Abfahrt";
@@ -242,18 +280,16 @@
             this.Platform.HeaderText = "Gleis / Kante";
             this.Platform.Name = "Platform";
             this.Platform.ReadOnly = true;
-            // 
-            // EndStation
-            // 
-            this.EndStation.HeaderText = "Endstation";
-            this.EndStation.Name = "EndStation";
-            this.EndStation.ReadOnly = true;
+            this.Platform.Width = 50;
             // 
             // PublicNavForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(928, 725);
+            this.ClientSize = new System.Drawing.Size(975, 540);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.stationLabel);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.stationBoardsGrid);
             this.Controls.Add(this.connectionsGrid);
             this.Controls.Add(this.queryConnections);
@@ -290,12 +326,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Duration;
         private System.Windows.Forms.DataGridViewTextBoxColumn Station;
         private System.Windows.Forms.DataGridViewTextBoxColumn Direction;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EndStation;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label stationLabel;
+        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridViewTextBoxColumn DepartureTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn BoardDirection;
         private System.Windows.Forms.DataGridViewTextBoxColumn Number;
         private System.Windows.Forms.DataGridViewTextBoxColumn ConnectionName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Platform;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EndStation;
     }
 }
 

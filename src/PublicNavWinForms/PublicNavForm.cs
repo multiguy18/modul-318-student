@@ -130,21 +130,39 @@ namespace PublicNavWinForms
                     });
                 }
             }
+
+            DisplayStationBoard(stationFrom.Text);
         }
 
         private void connectionsGrid_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            stationBoardsGrid.Rows.Clear();
-
             string station = connectionsGrid.Rows[e.RowIndex].Cells["Station"].Value.ToString();
             string strtime = connectionsGrid.Rows[e.RowIndex].Cells["Time"].Value.ToString();
 
+            DisplayStationBoard(station, strtime);
+        }
+
+        private void DisplayStationBoard(string station, string time = "")
+        {
+            List<StationBoard> stationBoards = null;
+
+            stationLabel.Text = "";
+            stationBoardsGrid.Rows.Clear();
+
             if (!string.IsNullOrWhiteSpace(station))
             {
+                stationLabel.Text = station;
 
-                DateTime departureTime = DateTime.ParseExact(strtime, "HH:mm", CultureInfo.InvariantCulture);
+                if (!string.IsNullOrWhiteSpace(time))
+                {
+                    DateTime departureTime = DateTime.ParseExact(time, "HH:mm", CultureInfo.InvariantCulture);
+                    stationBoards = transport.GetStationBoard(station, departureTime).Entries;
+                }
+                else
+                {
+                    stationBoards = transport.GetStationBoard(station).Entries;
+                }
 
-                List<StationBoard> stationBoards = transport.GetStationBoard(station, departureTime).Entries;
                 foreach (StationBoard board in stationBoards)
                 {
                     stationBoardsGrid.Rows.Add(new object[]
@@ -157,6 +175,11 @@ namespace PublicNavWinForms
                     });
                 }
             }
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
